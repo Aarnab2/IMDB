@@ -5,8 +5,7 @@ const url = `mongodb+srv://${process.env.USER_NAME}:${encodeURIComponent(process
 try {
     mongoose.connect(url, {
         useUnifiedTopology: true,
-        useNewUrlParser: true,
-        autoIndex: true
+        useNewUrlParser: true
     }).then(() => {
         console.log('Connected to Database successfully.')
     })
