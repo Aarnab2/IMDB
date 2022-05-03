@@ -39,6 +39,7 @@ router.post('/api/logout', async (req, res) => {
         res.status(200).send({ msg: "Logged Out successfully." })
     } catch (e) {
         res.status(500).send({ msg: e.message });
+
     }
 })
 
