@@ -36,7 +36,6 @@ router.post('/api/login', async (req, res) => {
 router.post('/api/logout', auth, async (req, res) => {
     try {
         const user = req.user
-        res.cookie("authToken", 'ajbsd', { httpOnly: true, maxAge: 0 });
         user.tokens = user.tokens.filter((obj) => obj.token !== req.token)
         await user.save()
         res.status(200).send({ msg: "Logged Out successfully.", data: user })
