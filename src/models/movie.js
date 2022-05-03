@@ -6,11 +6,6 @@ const MovieSchema = new Schema({
         type: String,
         required: true
     },
-    // movieId: {
-    //     type: String,
-    //     required: true,
-    //     unique: true
-    // },
     actors: [
         {
             type: Schema.Types.ObjectId,

@@ -5,11 +5,6 @@ const ReviewSchema = new Schema({
     comment: {
         type: String
     },
-    // reviewId: {
-    //     type: String,
-    //     required: true,
-    //     unique: true
-    // },
     rating: {
         type: Number,
         required: true
