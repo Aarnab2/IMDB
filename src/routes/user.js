@@ -25,8 +25,7 @@ router.post('/api/login', async (req, res) => {
         if (!userData.user)
             throw new Error(userData.msg)
         const token = await userData.user.generateAuthtoken() // instance method
-        //res.cookie('authToken', token, { httpOnly: true, maxAge: 3600 * 1000 })
-        req.user = userData.user
+
         res.status(200).send({ msg: 'Logged in', data: userData.user, token })
     } catch (e) {
         console.log(e.message)
