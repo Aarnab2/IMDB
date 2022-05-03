@@ -25,7 +25,7 @@ router.post('/api/login', async (req, res) => {
         if (!userData.user)
             throw new Error(userData.msg)
         const token = await userData.user.generateAuthtoken() // instance method
-
+        res.cookie('authToken', token, { httpOnly: true, maxAge: 20 * 24 * 3600 * 1000 }) //20days
         res.status(200).send({ msg: 'Logged in', data: userData.user, token })
     } catch (e) {
         console.log(e.message)
@@ -36,8 +36,7 @@ router.post('/api/login', async (req, res) => {
 router.post('/api/logout', auth, async (req, res) => {
     try {
         const user = req.user
-        user.tokens = user.tokens.filter((obj) => obj.token !== req.token)
-        await user.save()
+        res.cookie("authToken", 'ajbsd', { httpOnly: true, maxAge: 0 });
         res.status(200).send({ msg: "Logged Out successfully.", data: user })
     } catch (e) {
         res.status(500).send({ msg: e.message, data: null });

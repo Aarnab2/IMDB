@@ -35,16 +35,7 @@ const UserSchema = new Schema({
             if (val.toLowerCase().includes("password"))
                 throw new Error(`password can't contain the word "password" in it.`)
         }
-    },
-    tokens: [
-        {
-            token: {
-                type: String,
-                required: true
-            },
-            _id: false
-        }
-    ]
+    }
 },
     { timestamps: true }
 )
@@ -63,13 +54,10 @@ UserSchema.statics.findByCredentials = async (email, password) => {
 }
 
 //INSTANCE METHODS
-const tokenAge = 10 * 1000
 UserSchema.methods.generateAuthtoken = async function () {
     const user = this
     // console.log(user)
     const token = await jwt.sign({ _id: user.userId }, 'mysecretkey', { expiresIn: "20d" })
-    user.tokens = user.tokens.concat({ token })
-    await user.save()
     return token
 }
 

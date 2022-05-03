@@ -3,6 +3,7 @@ const actorRouter = require('./src/routes/actor')
 const movieRouter = require('./src/routes/movie')
 const reviewRouter = require('./src/routes/review')
 const userRouter = require('./src/routes/user')
+const cookieParser = require('cookie-parser')
 
 const app = express()
 
@@ -10,6 +11,7 @@ require('./db/db_connect')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(cookieParser())
 
 app.use(actorRouter)
 app.use(movieRouter)
