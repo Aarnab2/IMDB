@@ -33,13 +33,12 @@ router.post('/api/login', async (req, res) => {
     }
 })
 
-router.post('/api/logout', auth, async (req, res) => {
+router.post('/api/logout', async (req, res) => {
     try {
-        const user = req.user
         res.cookie("authToken", 'ajbsd', { httpOnly: true, maxAge: 0 });
-        res.status(200).send({ msg: "Logged Out successfully.", data: user })
+        res.status(200).send({ msg: "Logged Out successfully." })
     } catch (e) {
-        res.status(500).send({ msg: e.message, data: null });
+        res.status(500).send({ msg: e.message });
     }
 })
 
