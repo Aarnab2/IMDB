@@ -3,8 +3,8 @@ const jwt = require('jsonwebtoken')
 
 module.exports = async (req, res, next) => {
     try {
-        //const token = req.cookies.authToken
-        const token = req.header('Authorization')?.replace('Bearer ', '') // while testing in jest
+
+        const token = req.header('Authorization')?.replace('Bearer ', '')
         console.log("cookie...  ", token)
         if (token) {
             await jwt.verify(token, 'mysecretkey', async (err, data) => {
@@ -30,14 +30,12 @@ module.exports = async (req, res, next) => {
                         }
                     }
 
-                    //res.status(405).send({ status: 405, msg: err + " Token Expired, login again" })
                     throw new Error(err.message + " Token Expired, login again")
                 }
             })
             next()
         }
         else
-            //res.status(405).json({ status: 405, msg: "Invalid request, not Authenticated!" })
             throw new Error("Invalid request")
     } catch (e) {
         res.status(401).send({ msg: e.message + ' Not Authenticated' })
