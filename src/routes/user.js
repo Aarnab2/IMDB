@@ -45,8 +45,8 @@ router.post('/api/logout', async (req, res) => {
 
 router.get('/api/me', auth, async (req, res) => {
     try {
-        const user = await User.findOne({ userId: req.query.userId })
-        res.send(user)
+        //const user = await User.findOne({ userId: req.query.userId })
+        res.send(req.user)
 
     } catch (e) {
         console.log(e.message)
