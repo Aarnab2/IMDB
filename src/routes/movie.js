@@ -63,8 +63,9 @@ router.get('/api/movies', auth, async (req, res) => {
     try {
         const { name } = req.body
 
-        const movies = await Movie.find({ name }, { _id: 0, name: 1, movieId: 1 })
-
+        //const movies = await Movie.find({ name }, { _id: 0, name: 1, movieId: 1 })
+        const movies = await Movie.find({ name: { $regex: name, $options: "$i" } })
+        console.log("movies ", movies)
         res.status(200).send({ msg: 'Movies fetched succesfully', data: movies })
     } catch (e) {
         console.log(e.message)
